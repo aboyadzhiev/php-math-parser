@@ -8,7 +8,7 @@ The recommended way to install Match is [through composer](http://getcomposer.or
 ```JSON
 {
     "require": {
-        "aboyadzhiev/php-math-parser": "0.1"
+        "aboyadzhiev/php-math-parser": "dev-master"
     }
 }
 ```
