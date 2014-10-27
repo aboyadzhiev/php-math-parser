@@ -3,7 +3,7 @@
 Simple mathematical expression parser and calculator.
 
 ## Install
-The recommended way to install Match is [through composer](http://getcomposer.org).
+The recommended way to install Math is [through composer](http://getcomposer.org).
 
 ```JSON
 {
