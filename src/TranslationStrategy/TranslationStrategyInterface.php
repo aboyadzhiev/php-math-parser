@@ -1,6 +1,6 @@
 <?php
 
-namespace Math\TranslationStrategy;
+namespace oat\beeme\TranslationStrategy;
 
 /**
  * Translation strategy interface.
