@@ -7,7 +7,7 @@ chdir(dirname(__DIR__));
 
 require 'vendor/autoload.php';
 
-$parser = new \Math\Parser();
+$parser = new \oat\beeme\Parser();
 $expression = '1 + 2 * 3 * ( 7 * 8 ) - ( 45 - 10 )';
 $result = $parser->evaluate($expression);
 

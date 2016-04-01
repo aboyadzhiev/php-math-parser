@@ -1,9 +1,9 @@
 <?php
 
-namespace Math\TranslationStrategy;
+namespace oat\beeme\TranslationStrategy;
 
 use InvalidArgumentException;
-use Math\Token;
+use oat\beeme\Token;
 use SplQueue;
 use SplStack;
 

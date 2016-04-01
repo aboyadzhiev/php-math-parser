@@ -1,6 +1,6 @@
 <?php
 
-namespace Math;
+namespace oat\beeme;
 
 /**
  * Tokenize mathematical expression.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Math;
+namespace oat\beeme;
 
 /**
  * Value object representing one token of mathematical expression.

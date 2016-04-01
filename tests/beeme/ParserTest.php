@@ -1,13 +1,14 @@
 <?php
 
-namespace Math;
+namespace oat\beeme\tests;
 
 use PHPUnit_Framework_TestCase;
+use oat\beeme\Parser;
 
 class ParserTest extends PHPUnit_Framework_TestCase
 {
     public function testCanCreateParser()
     {
-        $this->assertInstanceOf('\Math\Parser', new Parser());
+        $this->assertInstanceOf('oat\beeme\Parser', new Parser());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Math;
+namespace oat\beeme;
 
 /**
  * Evaluate mathematical expression.
@@ -31,7 +31,7 @@ class Parser
      * @var array 
      */
     private $options = array(
-        'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard',
+        'translationStrategy' => '\oat\beeme\TranslationStrategy\ShuntingYard',
     );
 
     /**
@@ -44,7 +44,7 @@ class Parser
      * 
      * <code>
      *  $options = array(
-     *      'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard'
+     *      'translationStrategy' => '\oat\beeme\TranslationStrategy\ShuntingYard'
      *  );
      * </code>
      * 
@@ -68,7 +68,7 @@ class Parser
         $lexer = $this->getLexer();
         $tokens = $lexer->tokenize($expression);
 
-        $translationStrategy = new \Math\TranslationStrategy\ShuntingYard();
+        $translationStrategy = new \oat\beeme\TranslationStrategy\ShuntingYard();
 
         return $this->evaluateRPN($translationStrategy->translate($tokens));
     }
