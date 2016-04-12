@@ -80,6 +80,8 @@ class Lexer
                 $token = new Token($t, Token::T_LEFT_BRACKET);
             }elseif(')' === $t) {
                 $token = new Token($t, Token::T_RIGHT_BRACKET);
+            }elseif('' === $t) {
+                continue;
             }else {
                 throw new \InvalidArgumentException(sprintf('Syntax error: unknown token "%s"', $t));
             }
