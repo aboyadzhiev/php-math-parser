@@ -2,6 +2,11 @@
 
 namespace Math;
 
+use InvalidArgumentException;
+use Math\TranslationStrategy\ShuntingYard;
+use Math\TranslationStrategy\TranslationStrategyInterface;
+use SplStack;
+
 /**
  * Evaluate mathematical expression.
  *
@@ -10,44 +15,44 @@ namespace Math;
 class Parser
 {
     /**
-     * Lexer wich should tokenize the mathematical expression.
+     * Lexer which should tokenize the mathematical expression.
      *
      * @var Lexer
      */
-    protected $lexer;
+    protected Lexer $lexer;
 
     /**
      * TranslationStrategy that should translate from infix
-     * mathematical expression notation to reverse-polish 
+     * mathematical expression notation to reverse-polish
      * mathematical expression notation.
      *
-     * @var TranslationStrategy\TranslationStrategyInterface
+     * @var TranslationStrategyInterface
      */
-    protected $translationStrategy;
-    
+    protected TranslationStrategyInterface $translationStrategy;
+
     /**
      * Array of key => value options.
      *
-     * @var array 
+     * @var array
      */
-    private $options = array(
+    private array $options = array(
         'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard',
     );
 
     /**
-     * Create new Lexer wich can evaluate mathematical expression.
-     * Accept array of configuration options, currently supports only 
+     * Create new Lexer which can evaluate mathematical expression.
+     * Accept array of configuration options, currently supports only
      * one option "translationStrategy" => "Fully\Qualified\Classname".
-     * Class represent by this options is responsible for translation
+     * Class represented by these options is responsible for translation
      * from infix mathematical expression notation to reverse-polish
      * mathematical expression notation.
-     * 
+     *
      * <code>
      *  $options = array(
      *      'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard'
      *  );
      * </code>
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -59,16 +64,16 @@ class Parser
 
     /**
      * Evaluate string representing mathematical expression.
-     * 
+     *
      * @param string $expression
      * @return float
      */
-    public function evaluate($expression)
+    public function evaluate(string $expression): float
     {
         $lexer = $this->getLexer();
         $tokens = $lexer->tokenize($expression);
 
-        $translationStrategy = new \Math\TranslationStrategy\ShuntingYard();
+        $translationStrategy = new ShuntingYard();
 
         return $this->evaluateRPN($translationStrategy->translate($tokens));
     }
@@ -76,19 +81,19 @@ class Parser
     /**
      * Evaluate array sequence of tokens in Reverse Polish notation (RPN)
      * representing mathematical expression.
-     * 
+     *
      * @param array $expressionTokens
      * @return float
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function evaluateRPN(array $expressionTokens)
+    private function evaluateRPN(array $expressionTokens): float
     {
-        $stack = new \SplStack();
+        $stack = new SplStack();
 
         foreach ($expressionTokens as $token) {
             $tokenValue = $token->getValue();
             if (is_numeric($tokenValue)) {
-                $stack->push((float) $tokenValue);
+                $stack->push((float)$tokenValue);
                 continue;
             }
 
@@ -112,8 +117,7 @@ class Parser
                     $stack->push($stack->pop() % $n);
                     break;
                 default:
-                    throw new \InvalidArgumentException(sprintf('Invalid operator detected: %s', $tokenValue));
-                    break;
+                    throw new InvalidArgumentException(sprintf('Invalid operator detected: %s', $tokenValue));
             }
         }
 
@@ -122,10 +126,10 @@ class Parser
 
     /**
      * Return lexer.
-     * 
+     *
      * @return Lexer
      */
-    public function getLexer()
+    public function getLexer(): Lexer
     {
         return $this->lexer;
     }
