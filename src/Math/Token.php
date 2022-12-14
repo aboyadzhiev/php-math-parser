@@ -2,6 +2,8 @@
 
 namespace Math;
 
+use InvalidArgumentException;
+
 /**
  * Value object representing one token of mathematical expression.
  *
@@ -20,23 +22,23 @@ class Token
      *
      * @var string
      */
-    protected $value;
-    
+    protected string $value;
+
     /**
      * Token type one of Token::T_* constants
      *
      * @var integer
      */
-    protected $type;
+    protected int $type;
 
     /**
      * Create new "Value object" which represent one token
-     * 
-     * @param integer|string $value
+     *
+     * @param string $value
      * @param integer $type
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function __construct($value, $type)
+    public function __construct(string $value, int $type)
     {
         $tokeTypes = array(
             self::T_OPERATOR,
@@ -45,7 +47,7 @@ class Token
             self::T_RIGHT_BRACKET
         );
         if (!in_array($type, $tokeTypes, true)) {
-            throw new \InvalidArgumentException(sprintf('Invalid token type: %s', $type));
+            throw new InvalidArgumentException(sprintf('Invalid token type: %s', $type));
         }
 
         $this->value = $value;
@@ -54,10 +56,10 @@ class Token
 
     /**
      * Return token value
-     * 
-     * @return string|integer
+     *
+     * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -67,19 +69,19 @@ class Token
      *
      * return integer
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
 
     /**
      * Return string representation of this token.
-     * 
+     *
      * @return string
      */
     public function __toString()
     {
-        return (string) $this->getValue();
+        return $this->getValue();
     }
 
 }

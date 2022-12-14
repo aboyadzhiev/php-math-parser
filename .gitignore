@@ -1,7 +1,8 @@
-/vendor/
-/nbproject
+vendor/
+.idea
 composer.lock
 .buildpath
 .project
 .settings/
 *.swp
+composer.phar
