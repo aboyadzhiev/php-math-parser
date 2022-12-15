@@ -20,53 +20,45 @@ class Lexer
     protected array $tokens;
 
     /**
-     * The mathematical expression that should be tokenized
+     * The math expression
      *
-     * @var string
+     * @var Expression
      */
-    protected string $code;
+    protected Expression $expression;
 
     /**
      * Mathematical operators map
      *
      * @var array
      */
-    protected static array $operatorsMap = array(
-        '+' => array('priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '-' => array('priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '*' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '/' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '%' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-    );
+    protected static array $operatorsMap = [
+        '+' => ['priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '-' => ['priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '*' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '/' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '%' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+    ];
 
     public function __construct()
     {
-        $this->tokens = array();
+        $this->tokens = [];
     }
 
     /**
      * Tokenize mathematical expression.
      *
-     * @param string $code
+     * @param string $expression
      * @return array Collection of Token instances
      * @throws InvalidArgumentException
      */
-    public function tokenize(string $code): array
+    public function tokenize(string $expression): array
     {
-        $code = trim($code);
-        if (empty($code)) {
-            throw new InvalidArgumentException('Cannot tokenize empty string.');
-        }
+        $this->expression = new Expression(trim($expression));
+        $this->tokens = [];
 
-        $this->code = $code;
-        $this->tokens = array();
-
-        $tokenArray = explode(' ', $this->code);
-
-        if (!is_array($tokenArray) || empty($tokenArray)) {
-            throw new InvalidArgumentException(
-                sprintf('Cannot tokenize string: %s, please use " "(empty space for delimiter between tokens)', $this->code)
-            );
+        $tokenArray = $this->expression->getTokens();
+        if (empty($tokenArray)) {
+            throw new InvalidArgumentException(sprintf('Cannot tokenize expression: %s', $this->expression));
         }
 
         foreach ($tokenArray as $t) {
@@ -82,8 +74,6 @@ class Lexer
                 $token = new Token($t, Token::T_LEFT_BRACKET);
             } elseif (')' === $t) {
                 $token = new Token($t, Token::T_RIGHT_BRACKET);
-            } elseif ('' === $t) {
-                continue;
             } else {
                 throw new InvalidArgumentException(sprintf('Syntax error: unknown token "%s"', $t));
             }

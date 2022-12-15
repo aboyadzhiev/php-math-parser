@@ -22,3 +22,8 @@ $expression = '-1 + -2 * 13 * ( 7 * 8 ) - ( 415 - 0.1 )';
 $result = $parser->evaluate($expression);
 
 printf('%s => %f;%s', $expression, $result, PHP_EOL);
+
+$expression = '-2+-2*13*(7*8)-(415-0.1)';
+$result = $parser->evaluate($expression);
+
+printf('%s => %f;%s', $expression, $result, PHP_EOL);
