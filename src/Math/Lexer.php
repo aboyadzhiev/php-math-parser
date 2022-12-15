@@ -31,17 +31,17 @@ class Lexer
      *
      * @var array
      */
-    protected static array $operatorsMap = array(
-        '+' => array('priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '-' => array('priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '*' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '/' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-        '%' => array('priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE),
-    );
+    protected static array $operatorsMap = [
+        '+' => ['priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '-' => ['priority' => 0, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '*' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '/' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+        '%' => ['priority' => 1, 'associativity' => Operator::O_LEFT_ASSOCIATIVE],
+    ];
 
     public function __construct()
     {
-        $this->tokens = array();
+        $this->tokens = [];
     }
 
     /**
@@ -54,7 +54,7 @@ class Lexer
     public function tokenize(string $expression): array
     {
         $this->expression = new Expression(trim($expression));
-        $this->tokens = array();
+        $this->tokens = [];
 
         $tokenArray = $this->expression->getTokens();
         if (empty($tokenArray)) {

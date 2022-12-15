@@ -34,9 +34,9 @@ class Parser
      *
      * @var array
      */
-    private array $options = array(
+    private array $options = [
         'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard',
-    );
+    ];
 
     /**
      * Create new Lexer which can evaluate mathematical expression.
@@ -47,14 +47,14 @@ class Parser
      * mathematical expression notation.
      *
      * <code>
-     *  $options = array(
+     *  $options = [
      *      'translationStrategy' => '\Math\TranslationStrategy\ShuntingYard'
-     *  );
+     *  ];
      * </code>
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->lexer = new Lexer();
         $this->options = array_merge($this->options, $options);

@@ -26,8 +26,8 @@ class Expression
      */
     private array $tokens;
 
-    private static array $operatorTokens = array('-', '+', '*', '/');
-    private static array $brackets = array('(', ')');
+    private static array $operatorTokens = ['-', '+', '*', '/'];
+    private static array $brackets = ['(', ')'];
 
     /**
      * @param string $source
@@ -35,7 +35,7 @@ class Expression
     public function __construct(string $source)
     {
         $this->source = $source;
-        $this->tokens = array();
+        $this->tokens = [];
         $this->parse();
     }
 

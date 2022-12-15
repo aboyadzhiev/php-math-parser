@@ -28,7 +28,7 @@ class Operator extends Token
      */
     public function __construct(string $value, int $priority, int $associativity)
     {
-        if (!in_array($associativity, array(self::O_LEFT_ASSOCIATIVE, self::O_NONE_ASSOCIATIVE, self::O_RIGHT_ASSOCIATIVE))) {
+        if (!in_array($associativity, [self::O_LEFT_ASSOCIATIVE, self::O_NONE_ASSOCIATIVE, self::O_RIGHT_ASSOCIATIVE])) {
             throw new InvalidArgumentException(sprintf('Invalid associativity: %s', $associativity));
         }
 

@@ -40,12 +40,12 @@ class Token
      */
     public function __construct(string $value, int $type)
     {
-        $tokeTypes = array(
+        $tokeTypes = [
             self::T_OPERATOR,
             self::T_OPERAND,
             self::T_LEFT_BRACKET,
             self::T_RIGHT_BRACKET
-        );
+        ];
         if (!in_array($type, $tokeTypes, true)) {
             throw new InvalidArgumentException(sprintf('Invalid token type: %s', $type));
         }
