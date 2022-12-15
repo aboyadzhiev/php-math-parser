@@ -27,6 +27,8 @@ class ExpressionTest extends TestCase
 
     public function expressionProvider(): array
     {
+        // Array of arrays with 2 elements: 1st the math expression, 2nd the token array expected to be returned after
+        // parsing the expression.
         return [
             ['1 + 1', ['1', '+', '1']],
             ['1+1', ['1', '+', '1']],
