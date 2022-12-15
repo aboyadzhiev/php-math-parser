@@ -14,7 +14,7 @@ The recommended way to install Math is [through composer](http://getcomposer.org
 ```
 ## Usage
 
-Here is an simple example of evaluation of mathematical expression
+Here is simple example of evaluating math expression
 ```php
 <?php
 
@@ -22,12 +22,18 @@ $parser = new \Math\Parser();
 $expression = '1 + 2 * 3 * ( 7 * 8 ) - ( 45 - 10 )';
 $result = $parser->evaluate($expression);
 
-echo $result; //302
+echo $result; // 302
+
+$expression = '-2+-2*13*(7*8)-(415-0.1)';
+$result = $parser->evaluate($expression);
+
+echo $result; // -1872.90
+
+
 
 ```
 ## TODO
-  - Add unit tests.
-  - Add additional strategy for translation from infix to reverse polish notation
+  - Add additional translation strategy
 
 ## License
 
