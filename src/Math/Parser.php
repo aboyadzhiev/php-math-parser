@@ -3,7 +3,6 @@
 namespace Math;
 
 use InvalidArgumentException;
-use Math\TranslationStrategy\ShuntingYard;
 use Math\TranslationStrategy\TranslationStrategyInterface;
 use SplStack;
 
@@ -59,6 +58,10 @@ class Parser
     {
         $this->lexer = new Lexer();
         $this->options = array_merge($this->options, $options);
+        if (!class_exists($this->options['translationStrategy'])) {
+            throw new InvalidArgumentException(
+                sprintf('Class "%s" cannot be found!', $this->options['translationStrategy']));
+        }
         $this->translationStrategy = new $this->options['translationStrategy']();
     }
 
@@ -73,9 +76,7 @@ class Parser
         $lexer = $this->getLexer();
         $tokens = $lexer->tokenize($expression);
 
-        $translationStrategy = new ShuntingYard();
-
-        return $this->evaluateRPN($translationStrategy->translate($tokens));
+        return $this->evaluateRPN($this->translationStrategy->translate($tokens));
     }
 
     /**

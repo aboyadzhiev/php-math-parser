@@ -12,7 +12,7 @@ use SplStack;
  * Used to translate infix mathematical expressions
  * to RPN mathematical expressions.
  *
- * @see http://en.wikipedia.org/wiki/Shunting-yard_algorithm
+ * @see https://en.wikipedia.org/wiki/Shunting_yard_algorithm
  * @author Adrean Boyadzhiev (netforce) <adrean.boyadzhiev@gmail.com>
  */
 class ShuntingYard implements TranslationStrategyInterface
